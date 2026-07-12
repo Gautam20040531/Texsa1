@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEXSA | Premium Electronics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff; color: #000; }
+        .samsung-blue { color: #007bff; }
+        .bg-samsung-blue { background-color: #007bff; }
+        .nav-link { font-weight: 600; }
+        .nav-link:hover { color: #007bff; }
+        .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 4rem; }
+        .product-card { background-color: #f7f7f7; border-radius: 1.5rem; overflow: hidden; transition: all 0.3s ease; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        
+        /* Overlays */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60; display: none; justify-content: center; items-center: center; backdrop-filter: blur(5px); }
+        .overlay-content { background: white; padding: 2rem; border-radius: 1rem; width: 90%; max-width: 500px; position: relative; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* CSS for Centering "Our Legacy in Numbers" */
+        .legacy-numbers-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <a href="#" class="text-3xl font-black tracking-tighter text-black">
+                TEXSA
+            </a>
+            <div class="hidden md:flex items-center space-x-10 text-sm text-black">
+                <a href="index.html" class="nav-link">Home</a>
+                <div class="relative group">
+                    <button class="nav-link flex items-center">
+                        Products <i class="fas fa-chevron-down text-xs ml-1"></i>
+                    </button>
+                    <div class="absolute top-full -left-4 bg-white border border-gray-100 rounded-xl shadow-lg p-2 w-64 hidden group-hover:block z-10">
+                        <a href="#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">LED TV</a>
+                        <a href="#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Audio</a>
+                        <a href="#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Digital Standee</a>
+                        <a href="#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Interactive Flat Panels</a>
+                        <a href="#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Smart Touch Kiosk</a>
+                    </div>
+                </div>
+                <a href="#new-launches" class="nav-link">New Launches</a>
+                <a href="#footer" class="nav-link">Support</a>
+            </div>
+            <div class="flex items-center space-x-4 text-black">
+                <i class="fas fa-search text-xl cursor-pointer hover:samsung-blue" onclick="toggleOverlay('search-overlay')"></i>
+                <div class="relative">
+                    <i class="fas fa-shopping-cart text-xl cursor-pointer hover:samsung-blue" onclick="toggleOverlay('cart-overlay'); renderCart();"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+                </div>
+                <a href="signin.html"><i class="fas fa-user-circle text-xl cursor-pointer hover:samsung-blue"></i></a>
+                <a href="tel:+918035076002" class="bg-samsung-blue text-white font-bold text-sm py-2 px-5 rounded-full hover:opacity-90 transition whitespace-nowrap">
+                    Call Now
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative h-screen w-full pt-20">
+        <!-- Slider main container -->
+        <div class="swiper h-full">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide relative bg-black text-white flex items-center justify-center">
+                    <img src="Data/85-websos-tv-1024x683.png" alt="85 inch TV" class="absolute inset-0 w-full h-full object-cover opacity-50">
+                    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">The Ultimate 85" 4K TV</h1>
+                        <p class="text-lg text-gray-200 mb-10">Experience visuals like never before.</p>
+                        <a href="product-details.html?id=85-webos" class="bg-samsung-blue text-white px-8 py-3 rounded-full font-bold hover:opacity-90 transition duration-300">Explore Now</a>
+                    </div>
+                </div>
+                <div class="swiper-slide relative bg-black text-white flex items-center justify-center">
+                    <img src="Data/55-scaled.png" alt="55 inch TV" class="absolute inset-0 w-full h-full object-cover opacity-50">
+                    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">Premium 55" ThinQ AI TV</h1>
+                        <p class="text-lg text-gray-200 mb-10">Smart, sleek, and powerful.</p>
+                        <a href="product-details.html?id=55-premium" class="bg-samsung-blue text-white px-8 py-3 rounded-full font-bold hover:opacity-90 transition duration-300">Discover</a>
+                    </div>
+                </div>
+                <div class="swiper-slide relative bg-black text-white flex items-center justify-center">
+                    <img src="Data/60-scaled.png" alt="Digital Signage" class="absolute inset-0 w-full h-full object-cover opacity-50">
+                    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">Dynamic Digital Signage</h1>
+                        <p class="text-lg text-gray-200 mb-10">Engage your audience with stunning visuals.</p>
+                        <a href="product-details.html?id=digital-standee" class="bg-samsung-blue text-white px-8 py-3 rounded-full font-bold hover:opacity-90 transition duration-300">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev text-white"></div>
+            <div class="swiper-button-next text-white"></div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-black text-white">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="section-title text-white">Explore Our Best Products</h2>
+            <p class="text-gray-400 mb-12 max-w-2xl mx-auto">Experience the power of Texsa Electronics.</p>
+            
+            <div class="relative w-full max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-gray-800">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="Data/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section id="new-launches" class="py-24 bg-white text-black">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">New Launches</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="product-card p-10 flex flex-col justify-between h-[600px] relative overflow-hidden group cursor-pointer" onclick="window.location.href='product-details.html?id=85-webos'">
+                    <div class="z-10">
+                        <span class="bg-samsung-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Flagship</span>
+                        <h3 class="text-4xl font-bold mt-4 mb-2 tracking-tight">85" WebOS 4K TV</h3>
+                        <p class="text-gray-700">Cinematic experience at home.</p>
+                        <button class="mt-8 bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition" onclick="event.stopPropagation(); addToCart('85-webos')">Add to Cart</button>
+                    </div>
+                    <img src="Data/85-websos-tv-1024x683.png" class="absolute -bottom-4 -right-4 w-4/5 object-contain group-hover:scale-105 transition duration-500 ease-in-out">
+                </div>
+
+                <div class="grid grid-rows-2 gap-6 h-[600px]">
+                    <div class="product-card p-8 flex-1 relative overflow-hidden flex items-center group cursor-pointer" onclick="window.location.href='product-details.html?id=50-webos'">
+                        <div class="z-10 w-1/2 pl-4">
+                            <h3 class="text-2xl font-bold mb-2 tracking-tight">50" WebOS TV</h3>
+                            <p class="text-gray-700 text-sm mb-4">Smart Interface.</p>
+                            <span class="samsung-blue font-bold text-sm">Learn more &rarr;</span>
+                        </div>
+                        <img src="Data/50-inch-webos-tv-1-1024x683.png" class="absolute right-0 bottom-0 w-3/5 object-contain group-hover:scale-105 transition duration-500 ease-in-out">
+                    </div>
+                    
+                    <div class="product-card p-8 flex-1 relative overflow-hidden flex items-center group cursor-pointer" onclick="window.location.href='product-details.html?id=43-cloud'">
+                        <div class="z-10 w-1/2 pl-4">
+                            <h3 class="text-2xl font-bold mb-2 tracking-tight">43" Cloud TV</h3>
+                            <p class="text-gray-700 text-sm mb-4">Powered by Cloud.</p>
+                            <span class="samsung-blue font-bold text-sm">Learn more &rarr;</span>
+                        </div>
+                        <img src="Data/43-inch-cloudf-tv-1-1024x683.png" class="absolute right-0 bottom-0 w-3/5 object-contain group-hover:scale-105 transition duration-500 ease-in-out">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="py-24 bg-gray-50">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">All Categories</h2>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination-controls" class="flex justify-center items-center space-x-2 mt-16">
+                <!-- Pagination links will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Legacy in Numbers Section -->
+    <section class="py-20 bg-white border-t border-gray-100">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 legacy-numbers-container">
+            <h2 class="section-title">Our Legacy in Numbers</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-samsung-blue mb-2 stat-number" data-target="8000" data-suffix="+">0</div>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-wider">Pin Codes Covered</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-samsung-blue mb-2 stat-number" data-target="500" data-suffix="+">0</div>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-wider">Distribution Partners</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-samsung-blue mb-2 stat-number" data-target="25000" data-suffix="+">0</div>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-wider">Retail Touchpoints</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-samsung-blue mb-2 stat-number" data-target="11" data-suffix="">0</div>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-wider">Warehousing Units</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-samsung-blue mb-2 stat-number" data-target="500" data-suffix="+">0</div>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-wider">Service Centers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="overlay" onclick="if(event.target === this) toggleOverlay('search-overlay')">
+        <div class="overlay-content">
+            <h3 class="text-2xl font-bold mb-4">Search</h3>
+            <div class="relative">
+                <input type="text" id="search-input" placeholder="Search for products..." class="w-full border border-gray-300 rounded-full py-3 px-6 focus:outline-none focus:border-blue-500" oninput="performSearch()">
+                <i class="fas fa-search absolute right-5 top-4 text-gray-400"></i>
+            </div>
+            <div id="search-results" class="mt-4 max-h-60 overflow-y-auto space-y-2">
+                <!-- Search results injected here -->
+            </div>
+            <button onclick="toggleOverlay('search-overlay')" class="absolute top-4 right-4 text-gray-500 hover:text-black"><i class="fas fa-times text-xl"></i></button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="overlay" onclick="if(event.target === this) toggleOverlay('cart-overlay')">
+        <div class="overlay-content max-w-lg">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Your Cart</h3>
+                <button onclick="toggleOverlay('cart-overlay')" class="text-gray-500 hover:text-black"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-y-auto mb-6">
+                <!-- Cart items injected here -->
+                <p class="text-gray-500 text-center py-4">Your cart is empty.</p>
+            </div>
+            <button class="w-full bg-samsung-blue text-white font-bold py-3 rounded-full hover:opacity-90 transition">Checkout</button>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-black text-gray-400 pt-20 pb-10">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <div class="col-span-2 lg:col-span-2">
+                    <h4 class="text-2xl font-bold mb-4 text-white">TEXSA</h4>
+                    <p class="text-sm">Crafting quality electronics with modern design.</p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-white mb-4">Shop</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white">TV & Audio</a></li>
+                        <li><a href="#" class="hover:text-white">Digital Standee</a></li>
+                        <li><a href="#" class="hover:text-white">Interactive Displays</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-white mb-4">Support</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white">LED TV</a></li>
+                        <li><a href="#" class="hover:text-white">Audio</a></li>
+                        <li><a href="#" class="hover:text-white">Display</a></li>
+                        <li><a href="#" class="hover:text-white">Digital Stand</a></li>
+                        <li><a href="#" class="hover:text-white">Smart Touch</a></li>
+                        <li><a href="#" class="hover:text-white">Kiosk</a></li>
+                        <li><a href="#" class="hover:text-white">Contact with Tech</a></li>
+                        <li><a href="#" class="hover:text-white">Manuals</a></li>
+                        <li><a href="#" class="hover:text-white">Warranty</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-white mb-4">About Us</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white">Company Info</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h5 class="font-bold text-white mb-4">Contact</h5>
+                    <p class="text-sm">Salt Lake Sector-V, Kolkata 700091</p>
+                    <p class="text-lg font-bold text-white mt-2">+91 80350 76002</p>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-xs">
+                <p>&copy; 2026 TEXSA Electronics. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed top-24 right-5 bg-green-600 text-white py-3 px-6 rounded-full shadow-lg transform translate-x-[120%] transition-transform duration-500 ease-in-out z-50">
+        <i class="fas fa-check-circle mr-2"></i> Product added to cart!
+    </div>
+
+    <script>
+        // Product Database (Single Source of Truth)
+        const products = {
+            "85-webos": { title: '85" WebOS 4K TV', price: "₹1,49,999", images: ["Data/85-websos-tv-1024x683.png", "Data/photo2.png"] },
+            "50-webos": { title: '50" WebOS TV', price: "₹42,999", images: ["Data/50-inch-webos-tv-1-1024x683.png", "Data/50-768x644.png", "Data/51-1024x858.png"] },
+            "43-cloud": { title: '43" Cloud TV', price: "₹28,999", images: ["Data/43-inch-cloudf-tv-1-1024x683.png", "Data/43-inch-cloud-tv-1-scaled.png"] },
+            "digital-standee": { title: "Digital Standee", price: "₹85,000", images: ["Data/dugutral-strandeee-1-1024x858.png", "Data/dugutral-strandeee-768x644.png", "Data/77-1-1024x858.png"] },
+            "touch-kiosk": { title: "Touch Kiosk", price: "₹65,000", images: ["Data/kiosk-768x644.png", "Data/78-1024x858.png", "Data/59-scaled.png"] },
+            "led-display": { title: "LED Display", price: "₹1,20,000", images: ["Data/led-tv-768x644.png", "Data/80-1024x858.png", "Data/81-1024x858.png"] },
+            "32-smart-cloud": { title: '32" Smart Cloud TV', price: "₹12,999", images: ["Data/32-inch-cloude-tv-1-scaled.png", "Data/32-inch-google-tv-1-scaled.png", "Data/32-normal-1-scaled.png"] },
+            "55-premium": { title: '55" Premium TV', price: "₹55,999", images: ["Data/55-scaled.png", "Data/photo2.png"] },
+            "43-qled": { title: '43" QLED Display', price: "₹34,999", images: ["Data/43-inch-qled-1-scaled.png", "Data/60-scaled.png", "Data/61-scaled.png"] },
+            "digital-podium": { title: "Digital Podium", price: "₹95,000", images: ["Data/57-scaled.png", "Data/61-scaled.png", "Data/77-1-1024x858.png"] },
+            "ticket-kiosk": { title: "Ticket Kiosk", price: "₹75,000", images: ["Data/58-scaled.png", "Data/56-scaled.png", "Data/60-scaled.png"] },
+            "interactive-whiteboard": { title: "Interactive Whiteboard", price: "₹1,10,000", images: ["Data/79-1024x858.png", "Data/51-1024x858.png"] },
+            "smart-podium": { title: "Smart Podium", price: "₹1,05,000", images: ["Data/61-scaled.png", "Data/57-scaled.png"] },
+            "vertical-signage": { title: "Vertical Signage", price: "₹70,000", images: ["Data/56-scaled.png", "Data/dugutral-strandeee-1-1024x858.png"] },
+            "cinema-kiosk": { title: "Cinema Kiosk", price: "₹80,000", images: ["Data/60-scaled.png", "Data/58-scaled.png"] },
+            "audio-podium": { title: "Audio Podium", price: "₹45,000", images: ["Data/51-1024x858.png", "Data/57-scaled.png"] },
+            "commercial-display": { title: "Commercial Display", price: "₹1,35,000", images: ["Data/80-1024x858.png", "Data/led-tv-768x644.png"] },
+            "menu-board": { title: "Digital Menu Board", price: "₹55,000", images: ["Data/81-1024x858.png", "Data/56-scaled.png"] },
+            "google-tv": { title: '32" Google TV', price: "₹15,999", images: ["Data/32-inch-google-tv-1-scaled.png", "Data/32-inch-cloude-tv-1-scaled.png"] },
+            "standard-tv": { title: '32" Standard TV', price: "₹10,999", images: ["Data/32-normal-1-scaled.png", "Data/32-inch-cloude-tv-1-scaled.png"] }
+        };
+
+        // Create a unified product list for search and pagination
+        const productList = Object.keys(products).map(key => ({
+            id: key,
+            name: products[key].title,
+            img: products[key].images[0],
+            price: products[key].price,
+            ...products[key] // include all original data
+        }));
+
+        function performSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+
+            if (query.length < 1) return;
+
+            const results = productList.filter(item => item.name.toLowerCase().includes(query));
+
+            results.forEach(item => {
+                resultsContainer.innerHTML += `
+                    <div class="flex items-center gap-4 p-2 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="window.location.href='product-details.html?id=${item.id}'">
+                        <img src="${item.img}" class="w-12 h-12 object-contain rounded">
+                        <div>
+                            <p class="font-bold text-sm">${item.name}</p>
+                            <p class="text-xs text-gray-500">${item.price || ''}</p>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        // Session / Cart Logic
+        function toggleOverlay(id) {
+            const overlay = document.getElementById(id);
+            if (overlay.style.display === 'flex') {
+                overlay.style.display = 'none';
+            } else {
+                overlay.style.display = 'flex';
+            }
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            const container = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-4">Your cart is empty.</p>';
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center"><i class="fas fa-box text-gray-400"></i></div>
+                            <span class="font-bold text-sm capitalize">${item.replace(/-/g, ' ')}</span>
+                        </div>
+                        <button class="text-red-500 text-xs font-bold" onclick="removeFromCart('${item}')">Remove</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            const badge = document.getElementById('cart-badge');
+            if (cart.length > 0) {
+                badge.innerText = cart.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function addToCart(productId) {
+            const cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            cart.push(productId);
+            localStorage.setItem('texsaCart', JSON.stringify(cart));
+            updateCartBadge();
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast-notification');
+            toast.classList.remove('translate-x-[120%]');
+            setTimeout(() => {
+                toast.classList.add('translate-x-[120%]');
+            }, 3000); // Hide after 3 seconds
+        }
+
+        function removeFromCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            const index = cart.indexOf(productId);
+            if (index > -1) cart.splice(index, 1);
+            localStorage.setItem('texsaCart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+
+        // Pagination Logic
+        function renderProductsAndPagination() {
+            const productGrid = document.getElementById('product-grid');
+            const paginationControls = document.getElementById('pagination-controls');
+            const productsPerPage = 6;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const pageParam = urlParams.get('page');
+            let currentPage = pageParam ? parseInt(pageParam) : 1;
+
+            const totalProducts = productList.length;
+            const totalPages = Math.ceil(totalProducts / productsPerPage);
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            const start = (currentPage - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const productsToShow = productList.slice(start, end);
+
+            // Render products
+            productGrid.innerHTML = '';
+            productsToShow.forEach(item => {
+                productGrid.innerHTML += `
+                    <div class="product-card text-center p-6 cursor-pointer flex flex-col" onclick="window.location.href='product-details.html?id=${item.id}'">
+                        <div class="flex-grow flex items-center justify-center mb-4">
+                            <img src="${item.img}" class="h-48 mx-auto object-contain">
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-2 truncate">${item.name}</h3>
+                            <p class="text-lg font-semibold text-gray-800 mb-3">${item.price}</p>
+                            <span class="text-sm font-bold samsung-blue">View Details</span>
+                        </div>
+                    </div>`;
+            });
+
+            // Render pagination
+            paginationControls.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const isActive = i === currentPage;
+                paginationControls.innerHTML += `
+                    <a href="?page=${i}#categories" class="px-4 py-2 rounded-lg ${isActive ? 'bg-samsung-blue text-white font-bold' : 'bg-white text-black hover:bg-gray-200'} transition">${i}</a>
+                `;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+            renderProductsAndPagination();
+
+            const swiper = new Swiper('.swiper', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+            // Stats Animation
+            const observerOptions = { threshold: 0.5 };
+            const statsObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        const suffix = counter.getAttribute('data-suffix') || '';
+                        const duration = 2000;
+                        const startTime = performance.now();
+
+                        const updateCount = (currentTime) => {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const ease = 1 - Math.pow(1 - progress, 4); // EaseOutQuart
+                            
+                            const current = Math.floor(ease * target);
+                            counter.innerText = current.toLocaleString() + (progress === 1 ? suffix : '');
+
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                counter.innerText = target.toLocaleString() + suffix;
+                            }
+                        };
+
+                        requestAnimationFrame(updateCount);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.stat-number').forEach(stat => statsObserver.observe(stat));
+        });
+    </script>
+</body>
+</html>

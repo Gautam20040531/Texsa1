@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | TEXSA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff; color: #000; }
+        .samsung-blue { color: #007bff; }
+        .bg-samsung-blue { background-color: #007bff; }
+        .nav-link { font-weight: 600; }
+        .nav-link:hover { color: #007bff; }
+        .btn-primary { background-color: #007bff; color: white; padding: 12px 32px; border-radius: 9999px; font-weight: 700; transition: all 0.3s; }
+        .btn-primary:hover { background-color: #0056b3; }
+        .btn-secondary { background-color: transparent; border: 2px solid #000; color: #000; padding: 12px 32px; border-radius: 9999px; font-weight: 700; transition: all 0.3s; }
+        .btn-secondary:hover { background-color: #000; color: white; }
+        
+        /* Overlays */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60; display: none; justify-content: center; items-center: center; backdrop-filter: blur(5px); }
+        .overlay-content { background: white; padding: 2rem; border-radius: 1rem; width: 90%; max-width: 500px; position: relative; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</head>
+<body class="antialiased pt-20">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <a href="index.html" class="text-3xl font-black tracking-tighter text-black">TEXSA</a>
+            <div class="hidden md:flex items-center space-x-10 text-sm text-black">
+                <a href="index.html" class="nav-link">Home</a>
+                <div class="relative group">
+                    <button class="nav-link flex items-center">
+                        Products <i class="fas fa-chevron-down text-xs ml-1"></i>
+                    </button>
+                    <div class="absolute top-full -left-4 bg-white border border-gray-100 rounded-xl shadow-lg p-2 w-64 hidden group-hover:block z-10">
+                        <a href="index.html#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">LED TV</a>
+                        <a href="index.html#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Audio</a>
+                        <a href="index.html#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Digital Standee</a>
+                        <a href="index.html#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Interactive Flat Panels</a>
+                        <a href="index.html#categories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">Smart Touch Kiosk</a>
+                    </div>
+                </div>
+                <a href="index.html#new-launches" class="nav-link">New Launches</a>
+                <a href="index.html#footer" class="nav-link">Support</a>
+            </div>
+            <div class="flex items-center space-x-4 text-black">
+                <i class="fas fa-search text-xl cursor-pointer hover:samsung-blue" onclick="toggleOverlay('search-overlay')"></i>
+                <div class="relative">
+                    <i class="fas fa-shopping-cart text-xl cursor-pointer hover:samsung-blue" onclick="toggleOverlay('cart-overlay'); renderCart();"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+                </div>
+                <a href="signin.html"><i class="fas fa-user-circle text-xl cursor-pointer hover:samsung-blue"></i></a>
+                <a href="tel:+918035076002" class="bg-samsung-blue text-white font-bold text-sm py-2 px-5 rounded-full hover:opacity-90 transition whitespace-nowrap">
+                    Call Now
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Hero Section -->
+    <section class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Product Image -->
+            <div class="flex flex-col gap-4">
+                <div class="bg-gray-50 rounded-3xl p-8 flex items-center justify-center h-[500px] relative overflow-hidden">
+                    <img id="product-image" src="" alt="Product Image" class="max-h-full max-w-full object-contain drop-shadow-xl transition-all duration-500">
+                </div>
+                <div class="flex gap-4 overflow-x-auto pb-2" id="image-gallery">
+                    <!-- Thumbnails injected via JS -->
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div>
+                <span class="text-samsung-blue font-bold tracking-widest uppercase text-sm">New Arrival</span>
+                <h1 id="product-title" class="text-4xl md:text-5xl font-bold mt-2 mb-4 leading-tight"></h1>
+                <div class="flex items-center mb-6">
+                    <div class="flex text-yellow-400 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-gray-500 text-sm ml-2">(128 Reviews)</span>
+                </div>
+                <p id="product-price" class="text-3xl font-bold mb-6"></p>
+                <p id="product-desc" class="text-gray-600 text-lg mb-8 leading-relaxed"></p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="addToCartCurrent()" class="btn-primary flex-1 text-center">Add to Cart</button>
+                    <button class="btn-secondary">Buy Now</button>
+                </div>
+
+                <!-- Key Features Icons -->
+                <div class="grid grid-cols-4 gap-4 mt-10 border-t border-gray-100 pt-8">
+                    <div class="text-center">
+                        <i class="fas fa-tv text-2xl text-gray-400 mb-2"></i>
+                        <p class="text-xs font-bold">4K UHD</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-wifi text-2xl text-gray-400 mb-2"></i>
+                        <p class="text-xs font-bold">Smart</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-volume-up text-2xl text-gray-400 mb-2"></i>
+                        <p class="text-xs font-bold">Dolby</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-2xl text-gray-400 mb-2"></i>
+                        <p class="text-xs font-bold">Warranty</p>
+                    </div>
+                </div>
+
+                <!-- Manufacturing Info -->
+                <div class="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                    <p class="text-sm text-blue-800 font-semibold"><i class="fas fa-industry mr-2"></i>Made in India</p>
+                    <p class="text-xs text-blue-600 mt-1">Manufactured using high-grade components at our Kolkata facility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section (Conditional) -->
+    <section id="video-section" class="py-10 bg-black hidden">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-8 text-white">Experience It in Action</h2>
+            <div class="relative w-full max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-gray-800">
+                <video id="product-video" controls class="w-full h-full object-cover"></video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section class="bg-gray-50 py-20">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-10 text-center">Technical Specifications</h2>
+            <div class="bg-white rounded-3xl shadow-sm p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12" id="specs-container">
+                    <!-- Specs injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-20">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-10">Customer Reviews</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="reviews-container">
+                <!-- Reviews injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="overlay" onclick="if(event.target === this) toggleOverlay('search-overlay')">
+        <div class="overlay-content">
+            <h3 class="text-2xl font-bold mb-4">Search</h3>
+            <div class="relative">
+                <input type="text" id="search-input" placeholder="Search for products..." class="w-full border border-gray-300 rounded-full py-3 px-6 focus:outline-none focus:border-blue-500" oninput="performSearch()">
+                <i class="fas fa-search absolute right-5 top-4 text-gray-400"></i>
+            </div>
+            <div id="search-results" class="mt-4 max-h-60 overflow-y-auto space-y-2"></div>
+            <button onclick="toggleOverlay('search-overlay')" class="absolute top-4 right-4 text-gray-500 hover:text-black"><i class="fas fa-times text-xl"></i></button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="overlay" onclick="if(event.target === this) toggleOverlay('cart-overlay')">
+        <div class="overlay-content max-w-lg">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Your Cart</h3>
+                <button onclick="toggleOverlay('cart-overlay')" class="text-gray-500 hover:text-black"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-y-auto mb-6"></div>
+            <button class="w-full bg-samsung-blue text-white font-bold py-3 rounded-full hover:opacity-90 transition">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed top-24 right-5 bg-green-600 text-white py-3 px-6 rounded-full shadow-lg transform translate-x-[120%] transition-transform duration-500 ease-in-out z-50">
+        <i class="fas fa-check-circle mr-2"></i> Product added to cart!
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 pt-20 pb-10">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2026 TEXSA Electronics. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Product Database
+        const products = {
+            "85-webos": {
+                title: '85" WebOS 4K TV',
+                price: "₹1,49,999",
+                images: ["Data/85-websos-tv-1024x683.png", "Data/photo2.png"],
+                video: "Data/video.mp4",
+                desc: "Experience cinematic visuals with the massive 85-inch WebOS 4K TV. Powered by advanced AI upscaling and a rich ecosystem of apps.",
+                specs: ["Display: 85-inch 4K UHD", "OS: WebOS Smart Platform", "Sound: Dolby Atmos 40W", "Connectivity: 3 HDMI, 2 USB, Wi-Fi 6", "Processor: Quad Core 4K"],
+                reviews: [{user: "Rahul S.", text: "Absolutely stunning picture quality!"}, {user: "Priya M.", text: "Great TV, but sound could be better."}]
+            },
+            "50-webos": {
+                title: '50" WebOS TV',
+                price: "₹42,999",
+                images: ["Data/50-inch-webos-tv-1-1024x683.png", "Data/50-768x644.png", "Data/51-1024x858.png"],
+                video: "Data/video-2.mp4",
+                desc: "A perfect balance of size and performance. The 50-inch WebOS TV brings smart entertainment to your living room with a sleek bezel-less design.",
+                specs: ["Display: 50-inch 4K UHD", "OS: WebOS", "HDR: HDR10+ Support", "Apps: Netflix, Prime, Disney+", "Remote: Magic Remote Included"],
+                reviews: [{user: "Amit K.", text: "Best value for money TV."}, {user: "Sneha D.", text: "Interface is very smooth."}]
+            },
+            "43-cloud": {
+                title: '43" Cloud TV',
+                price: "₹28,999",
+                images: ["Data/43-inch-cloudf-tv-1-1024x683.png", "Data/43-inch-cloud-tv-1-scaled.png"],
+                video: "",
+                desc: "Powered by Cloud technology, this TV offers seamless streaming and gaming without the need for heavy hardware.",
+                specs: ["Display: 43-inch FHD", "OS: Cloud TV OS", "Storage: Cloud Storage Enabled", "Refresh Rate: 60Hz", "Panel: A+ Grade IPS"],
+                reviews: [{user: "Vikram R.", text: "Good for streaming."}, {user: "Anjali P.", text: "Nice picture quality."}]
+            },
+            "digital-standee": {
+                title: "Digital Standee",
+                price: "₹85,000",
+                images: ["Data/dugutral-strandeee-1-1024x858.png", "Data/dugutral-strandeee-768x644.png", "Data/77-1-1024x858.png"],
+                video: "",
+                desc: "High-impact digital signage for retail and corporate environments. Grab attention with vibrant visuals.",
+                specs: ["Size: 55-inch Vertical", "Brightness: 500 nits", "OS: Android / Windows", "Touch: Optional IR Touch", "Usage: 24/7 Operation"],
+                reviews: [{user: "Corp Tech", text: "Excellent for our lobby."}, {user: "Retail King", text: "Boosted our walk-ins."}]
+            },
+            "touch-kiosk": {
+                title: "Touch Kiosk",
+                price: "₹65,000",
+                images: ["Data/kiosk-768x644.png", "Data/78-1024x858.png", "Data/59-scaled.png"],
+                video: "",
+                desc: "Interactive self-service kiosk. Perfect for wayfinding, ordering, and information display.",
+                specs: ["Screen: 21.5-inch Touch", "Touch Points: 10-Point Capacitive", "Design: Floor Standing", "Connectivity: LAN, Wi-Fi", "Material: Metal Body"],
+                reviews: [{user: "Food Court", text: "Customers love ordering on this."}, {user: "Mall Admin", text: "Very sturdy build."}]
+            },
+            "led-display": {
+                title: "LED Display",
+                price: "₹1,20,000",
+                images: ["Data/led-tv-768x644.png", "Data/80-1024x858.png", "Data/81-1024x858.png"],
+                video: "",
+                desc: "Professional grade LED display for video walls and large format presentations.",
+                specs: ["Pixel Pitch: P2.5", "Brightness: 800 nits", "Contrast: 5000:1", "Life: 100,000 Hours", "Viewing Angle: 160 Degrees"],
+                reviews: [{user: "Event Org", text: "Bright and clear even in daylight."}]
+            },
+            "32-smart-cloud": {
+                title: '32" Smart Cloud TV',
+                price: "₹12,999",
+                images: ["Data/32-inch-cloude-tv-1-scaled.png", "Data/32-inch-google-tv-1-scaled.png", "Data/32-normal-1-scaled.png"],
+                video: "",
+                desc: "Compact and smart. The ideal secondary TV for bedrooms or kitchens.",
+                specs: ["Display: 32-inch HD Ready", "OS: Cloud Smart", "Sound: 20W Speakers", "Ports: 2 HDMI, 1 USB", "Bezel: Slim Design"],
+                reviews: [{user: "Student A", text: "Perfect for my dorm."}]
+            },
+            "55-premium": {
+                title: '55" Premium TV',
+                price: "₹55,999",
+                images: ["Data/55-scaled.png", "Data/photo2.png"],
+                video: "Data/video.mp4",
+                desc: "Premium design meets premium performance. Metal frame and quantum dot color.",
+                specs: ["Display: 55-inch 4K QLED", "Design: Ultra Slim Metal", "Sound: DTS Virtual:X", "Gaming: ALLM & VRR", "Bluetooth: v5.0"],
+                reviews: [{user: "Gamer X", text: "PS5 looks amazing on this."}]
+            },
+            "43-qled": {
+                title: '43" QLED Display',
+                price: "₹34,999",
+                images: ["Data/43-inch-qled-1-scaled.png", "Data/60-scaled.png", "Data/61-scaled.png"],
+                video: "",
+                desc: "Vibrant colors and deep blacks with QLED technology in a compact size.",
+                specs: ["Display: 43-inch QLED 4K", "Color Volume: 100%", "HDR: Dolby Vision", "Smart: Google TV", "Remote: Voice Remote"],
+                reviews: [{user: "Movie Buff", text: "Colors are popping!"}]
+            },
+            "digital-podium": {
+                title: "Digital Podium",
+                price: "₹95,000",
+                images: ["Data/57-scaled.png", "Data/61-scaled.png", "Data/77-1-1024x858.png"],
+                video: "",
+                desc: "Smart digital podium for modern classrooms and conference halls. Integrated touch display and PA system.",
+                specs: ["Screen: 21.5-inch Touch", "Mic: Gooseneck Microphone", "Material: Metal & Acrylic", "Connectivity: HDMI, VGA, USB", "OS: Windows 10/11"],
+                reviews: [{user: "University Dean", text: "Transformed our lecture halls."}]
+            },
+            "ticket-kiosk": {
+                title: "Ticket Kiosk",
+                price: "₹75,000",
+                images: ["Data/58-scaled.png", "Data/56-scaled.png", "Data/60-scaled.png"],
+                video: "",
+                desc: "Automated ticketing and queue management kiosk. Robust build for high-traffic areas.",
+                specs: ["Printer: Thermal Receipt Printer", "Scanner: QR/Barcode Scanner", "Screen: 19-inch Touch", "OS: Android/Windows", "Mount: Floor Standing"],
+                reviews: [{user: "Cinema Mgr", text: "Reduced queue times significantly."}]
+            },
+            "interactive-whiteboard": {
+                title: "Interactive Whiteboard",
+                price: "₹1,10,000",
+                images: ["Data/79-1024x858.png", "Data/51-1024x858.png"],
+                video: "",
+                desc: "Collaborate seamlessly with this multi-touch interactive whiteboard. Perfect for brainstorming and teaching.",
+                specs: ["Size: 75-inch", "Touch: 20-Point Multi-Touch", "Resolution: 4K UHD", "Glass: Anti-Glare Toughened", "Software: Whiteboard Suite Included"],
+                reviews: [{user: "School Principal", text: "Teachers love using this."}]
+            },
+            "smart-podium": {
+                title: "Smart Podium",
+                price: "₹1,05,000",
+                images: ["Data/61-scaled.png", "Data/57-scaled.png"],
+                video: "",
+                desc: "Advanced smart podium with integrated PC and touch controller for seamless presentations.",
+                specs: ["Screen: 22-inch Touch", "OS: Windows 11 Pro", "Mic: Dual Gooseneck", "Body: Steel & ABS", "Connectivity: Wireless Casting"],
+                reviews: [{user: "Conference Center", text: "Very professional look."}]
+            },
+            "vertical-signage": {
+                title: "Vertical Signage",
+                price: "₹70,000",
+                images: ["Data/56-scaled.png", "Data/dugutral-strandeee-1-1024x858.png"],
+                video: "",
+                desc: "Slim and portable vertical digital signage. Ideal for advertising in malls and lobbies.",
+                specs: ["Size: 43-inch", "Orientation: Portrait", "Brightness: 450 nits", "OS: Android Signage Player", "Stand: Foldable"],
+                reviews: [{user: "Retail Store", text: "Attracts a lot of customers."}]
+            },
+            "cinema-kiosk": {
+                title: "Cinema Kiosk",
+                price: "₹80,000",
+                images: ["Data/60-scaled.png", "Data/58-scaled.png"],
+                video: "",
+                desc: "Self-service kiosk designed for cinema ticketing and food ordering.",
+                specs: ["Screen: 24-inch Touch", "Payment: Card & UPI", "Printer: High Speed Thermal", "Scanner: 2D Barcode", "Mount: Floor"],
+                reviews: [{user: "Multiplex Owner", text: "Fast and reliable."}]
+            },
+            "audio-podium": {
+                title: "Audio Podium",
+                price: "₹45,000",
+                images: ["Data/51-1024x858.png", "Data/57-scaled.png"],
+                video: "",
+                desc: "Classic podium with built-in high-quality amplifier and speakers.",
+                specs: ["Output: 60W RMS", "Mic: 1 Gooseneck + 1 Wireless", "Light: Reading Lamp", "Inputs: Aux, USB", "Finish: Wooden Texture"],
+                reviews: [{user: "Auditorium Mgr", text: "Sound is crystal clear."}]
+            },
+            "commercial-display": {
+                title: "Commercial Display",
+                price: "₹1,35,000",
+                images: ["Data/80-1024x858.png", "Data/led-tv-768x644.png"],
+                video: "",
+                desc: "Heavy-duty commercial display rated for 18/7 operation.",
+                specs: ["Size: 65-inch", "Resolution: 4K", "Brightness: 500 nits", "Bezel: Even Bezel", "Control: RS232"],
+                reviews: [{user: "IT Admin", text: "Great for our control room."}]
+            },
+            "menu-board": {
+                title: "Digital Menu Board",
+                price: "₹55,000",
+                images: ["Data/81-1024x858.png", "Data/56-scaled.png"],
+                video: "",
+                desc: "Vibrant digital menu board for QSRs and cafes.",
+                specs: ["Size: 43-inch", "Panel: IPS High Brightness", "Software: CMS Included", "Mount: Ceiling/Wall", "Life: 50,000 Hrs"],
+                reviews: [{user: "Cafe Owner", text: "Food looks delicious on this."}]
+            },
+            "google-tv": {
+                title: '32" Google TV',
+                price: "₹15,999",
+                images: ["Data/32-inch-google-tv-1-scaled.png", "Data/32-inch-cloude-tv-1-scaled.png"],
+                video: "",
+                desc: "Smart entertainment with Google TV interface. Personalized recommendations.",
+                specs: ["OS: Google TV", "Voice: Google Assistant", "Apps: Play Store", "Chromecast: Built-in", "Remote: Voice Remote"],
+                reviews: [{user: "Home User", text: "Very easy to use."}]
+            },
+            "standard-tv": {
+                title: '32" Standard TV',
+                price: "₹10,999",
+                images: ["Data/32-normal-1-scaled.png", "Data/32-inch-cloude-tv-1-scaled.png"],
+                video: "",
+                desc: "Reliable non-smart LED TV for basic viewing needs.",
+                specs: ["Resolution: HD Ready", "Ports: HDMI, USB, VGA", "Sound: 20W", "Panel: A+ Grade", "Warranty: 1 Year"],
+                reviews: [{user: "Office Mgr", text: "Good for CCTV monitoring."}]
+            }
+        };
+
+        // Load Product Data
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        const product = products[productId];
+
+        if (product) {
+            document.getElementById('product-title').innerText = product.title;
+            document.getElementById('product-price').innerText = product.price;
+            document.getElementById('product-desc').innerText = product.desc;
+            
+            // Image Gallery Logic
+            const mainImage = document.getElementById('product-image');
+            mainImage.src = product.images[0];
+            
+            const gallery = document.getElementById('image-gallery');
+            product.images.forEach(imgSrc => {
+                gallery.innerHTML += `<img src="${imgSrc}" class="w-20 h-20 object-cover rounded-lg border border-gray-200 cursor-pointer hover:border-blue-500 transition" onclick="document.getElementById('product-image').src='${imgSrc}'">`;
+            });
+
+            // Video Logic
+            if (product.video) {
+                const videoSection = document.getElementById('video-section');
+                const videoPlayer = document.getElementById('product-video');
+                videoSection.classList.remove('hidden');
+                videoPlayer.src = product.video;
+            }
+
+            // Render Specs
+            const specsContainer = document.getElementById('specs-container');
+            product.specs.forEach(spec => {
+                specsContainer.innerHTML += `<div class="flex items-center border-b border-gray-100 pb-2"><span class="font-semibold text-gray-800 w-full">${spec}</span></div>`;
+            });
+
+            // Render Reviews
+            const reviewsContainer = document.getElementById('reviews-container');
+            product.reviews.forEach(review => {
+                reviewsContainer.innerHTML += `
+                    <div class="bg-gray-50 p-6 rounded-2xl">
+                        <div class="flex items-center mb-2">
+                            <div class="font-bold mr-2">${review.user}</div>
+                            <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                        <p class="text-gray-600 text-sm">"${review.text}"</p>
+                    </div>`;
+            });
+        } else {
+            document.body.innerHTML = "<div class='h-screen flex items-center justify-center text-2xl'>Product not found. <a href='index.html' class='text-blue-500 ml-2'>Go Home</a></div>";
+        }
+
+        // Shared Logic (Cart & Search)
+        function toggleOverlay(id) {
+            const overlay = document.getElementById(id);
+            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function performSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+            if (query.length < 2) return;
+
+            // Convert products object to array for searching
+            const productList = Object.keys(products).map(key => ({id: key, ...products[key]}));
+            const results = productList.filter(item => item.title.toLowerCase().includes(query));
+
+            results.forEach(item => {
+                resultsContainer.innerHTML += `
+                    <div class="flex items-center gap-4 p-2 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="window.location.href='product-details.html?id=${item.id}'">
+                        <img src="${item.images[0]}" class="w-12 h-12 object-contain rounded">
+                        <div>
+                            <p class="font-bold text-sm">${item.title}</p>
+                            <p class="text-xs text-gray-500">${item.price}</p>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            const container = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-4">Your cart is empty.</p>';
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center"><i class="fas fa-box text-gray-400"></i></div>
+                            <span class="font-bold text-sm capitalize">${item.replace(/-/g, ' ')}</span>
+                        </div>
+                        <button class="text-red-500 text-xs font-bold" onclick="removeFromCart('${item}')">Remove</button>
+                    </div>`).join('');
+            }
+        }
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            const badge = document.getElementById('cart-badge');
+            if (cart.length > 0) { badge.innerText = cart.length; badge.classList.remove('hidden'); }
+            else { badge.classList.add('hidden'); }
+        }
+        function addToCartCurrent() {
+            if(!productId) return;
+            const cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            cart.push(productId);
+            localStorage.setItem('texsaCart', JSON.stringify(cart));
+            updateCartBadge();
+            showToast();
+        }
+
+        function removeFromCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('texsaCart') || '[]');
+            const index = cart.indexOf(productId);
+            if (index > -1) cart.splice(index, 1);
+            localStorage.setItem('texsaCart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast-notification');
+            toast.classList.remove('translate-x-[120%]');
+            setTimeout(() => {
+                toast.classList.add('translate-x-[120%]');
+            }, 3000); // Hide after 3 seconds
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
+</body>
+</html>
