@@ -19,9 +19,19 @@
         .btn-secondary:hover { background-color: #000; color: white; }
         
         /* Overlays */
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60; display: none; justify-content: center; items-center: center; backdrop-filter: blur(5px); }
-        .overlay-content { background: white; padding: 2rem; border-radius: 1rem; width: 90%; max-width: 500px; position: relative; animation: slideDown 0.3s ease-out; }
-        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60; display: none; backdrop-filter: blur(5px); }
+        
+        /* Search Overlay - Top Slide */
+        #search-overlay { align-items: flex-start; justify-content: center; padding-top: 6rem; }
+        #search-overlay .overlay-content { background: white; padding: 2rem; border-radius: 0 0 1rem 1rem; width: 100%; max-width: 600px; animation: slideDown 0.3s ease-out; }
+        
+        /* Cart Overlay - Right Slide */
+        #cart-overlay { justify-content: flex-end; align-items: stretch; }
+        #cart-overlay .overlay-content { background: white; padding: 2rem; width: 100%; max-width: 450px; height: 100%; border-radius: 1rem 0 0 1rem; animation: slideLeft 0.3s ease-out; display: flex; flex-direction: column; }
+        
+        /* Animations */
+        @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideLeft { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
 <body class="antialiased pt-20">
@@ -184,9 +194,72 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-black text-gray-400 pt-20 pb-10">
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2026 TEXSA Electronics. All Rights Reserved.</p>
+    <footer id="footer" class="bg-black text-gray-400 pt-20 pb-10">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <div class="col-span-2 lg:col-span-2">
+                    <h4 class="text-2xl font-bold mb-4 text-white">TEXSA</h4>
+                    <p class="text-sm">Crafting quality electronics with modern design.</p>
+                    <div class="mt-6">
+                        <h5 class="font-bold text-white mb-3 text-sm">Follow Us</h5>
+                        <div class="flex space-x-4">
+                            <a href="https://www.instagram.com" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                            <a href="https://www.facebook.com" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="font-bold text-white mb-4">Shop</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white">TV & Audio</a></li>
+                        <li><a href="#" class="hover:text-white">Digital Standee</a></li>
+                        <li><a href="#" class="hover:text-white">Interactive Displays</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-white mb-4">Support</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white">LED TV</a></li>
+                        <li><a href="#" class="hover:text-white">Audio</a></li>
+                        <li><a href="#" class="hover:text-white">Display</a></li>
+                        <li><a href="#" class="hover:text-white">Digital Stand</a></li>
+                        <li><a href="#" class="hover:text-white">Smart Touch</a></li>
+                        <li><a href="#" class="hover:text-white">Kiosk</a></li>
+                        <li><a href="#" class="hover:text-white">Contact with Tech</a></li>
+                        <li><a href="#" class="hover:text-white">Manuals</a></li>
+                        <li><a href="#" class="hover:text-white">Warranty</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-white mb-4">About Us</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white">Company Info</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h5 class="font-bold text-white mb-4">Contact</h5>
+                    <div class="mb-4">
+                        <p class="text-xs text-gray-500 font-bold uppercase mb-1">Office Address:</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Noida,+Uttar+Pradesh+201306,+India" target="_blank" class="text-sm text-gray-400 hover:text-white transition block">
+                            Noida, Uttar Pradesh 201306, India
+                        </a>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-xs text-gray-500 font-bold uppercase mb-1">Zonal Office:</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=New+Market,+MNK+Road,+Nalhati,+Birbhum,+WB+731220" target="_blank" class="text-sm text-gray-400 hover:text-white transition block">
+                            New Market, MNK Road, Nalhati, Birbhum, WB – 731220
+                        </a>
+                        <div class="mt-4 rounded-lg overflow-hidden border border-gray-700 h-32 w-full">
+                            <iframe src="https://maps.google.com/maps?q=Noida,+Uttar+Pradesh+201306,+India&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <p class="text-lg font-bold text-white mt-4"><a href="tel:+918035076002" class="hover:text-samsung-blue transition">+91 80350 76002</a></p>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-xs">
+                <p>&copy; 2026 TEXSA Electronics. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -372,6 +445,114 @@
                 desc: "Reliable non-smart LED TV for basic viewing needs.",
                 specs: ["Resolution: HD Ready", "Ports: HDMI, USB, VGA", "Sound: 20W", "Panel: A+ Grade", "Warranty: 1 Year"],
                 reviews: [{user: "Office Mgr", text: "Good for CCTV monitoring."}]
+            },
+            "65-webos": {
+                title: '65" WebOS 4K TV',
+                price: "₹89,999",
+                images: ["Data/50-inch-webos-tv-1-1024x683.png", "Data/50-768x644.png"],
+                video: "",
+                desc: "Immersive 65-inch 4K display with WebOS. Enjoy your favorite streaming apps with ease.",
+                specs: ["Display: 65-inch 4K", "OS: WebOS", "Sound: 30W Dolby", "Connectivity: Wi-Fi, BT", "Warranty: 2 Years"],
+                reviews: [{user: "Home Theater Fan", text: "Perfect size for my hall."}]
+            },
+            "75-interactive": {
+                title: "75\" Interactive Panel",
+                price: "₹1,45,000",
+                images: ["Data/79-1024x858.png", "Data/51-1024x858.png"],
+                video: "",
+                desc: "Large format interactive display for boardrooms and classrooms. Multi-touch capability.",
+                specs: ["Size: 75-inch", "Touch: 20-Point", "OS: Android 11", "Glass: 4mm Toughened", "Inputs: HDMI, USB-C"],
+                reviews: [{user: "Corporate User", text: "Makes presentations very engaging."}]
+            },
+            "outdoor-standee": {
+                title: "Outdoor Digital Standee",
+                price: "₹1,10,000",
+                images: ["Data/dugutral-strandeee-1-1024x858.png", "Data/77-1-1024x858.png"],
+                video: "",
+                desc: "Weatherproof digital standee for outdoor advertising. High brightness for daylight visibility.",
+                specs: ["Brightness: 2000 nits", "IP Rating: IP65", "Cooling: Smart Fan System", "Size: 55-inch", "Body: Anti-Corrosion"],
+                reviews: [{user: "Ad Agency", text: "Great visibility even in sun."}]
+            },
+            "self-kiosk-pro": {
+                title: "Self-Ordering Kiosk Pro",
+                price: "₹90,000",
+                images: ["Data/kiosk-768x644.png", "Data/78-1024x858.png"],
+                video: "",
+                desc: "Premium self-ordering kiosk with built-in scanner and printer space.",
+                specs: ["Screen: 27-inch Touch", "OS: Windows/Android", "Mount: Floor/Wall", "Scanner: 2D QR", "Printer Slot: Yes"],
+                reviews: [{user: "Restaurant Chain", text: "Streamlined our ordering process."}]
+            },
+            "video-wall": {
+                title: "Video Wall Solution",
+                price: "₹2,50,000",
+                images: ["Data/led-tv-768x644.png", "Data/80-1024x858.png"],
+                video: "",
+                desc: "Seamless video wall solution for control rooms and large displays.",
+                specs: ["Bezel: 0.88mm", "Brightness: 700 nits", "Configuration: 2x2 or Custom", "Input: 4K Loop", "Life: 60,000 Hrs"],
+                reviews: [{user: "Security Firm", text: "Excellent clarity for monitoring."}]
+            },
+            "43-android": {
+                title: '43" Smart Android TV',
+                price: "₹26,999",
+                images: ["Data/43-inch-cloudf-tv-1-1024x683.png", "Data/43-inch-cloud-tv-1-scaled.png"],
+                video: "",
+                desc: "Smart Android TV with Google Play Store and Voice Remote.",
+                specs: ["OS: Android 11", "RAM/ROM: 1.5GB/8GB", "Apps: Netflix, Prime", "Sound: 24W", "Cast: Chromecast Built-in"],
+                reviews: [{user: "Tech Savvy", text: "Good features for the price."}]
+            },
+            "55-android": {
+                title: '55" 4K Android TV',
+                price: "₹48,999",
+                images: ["Data/55-scaled.png", "Data/photo2.png"],
+                video: "",
+                desc: "Stunning 4K visuals on a 55-inch Android TV. Bezel-less design.",
+                specs: ["Display: 55-inch 4K", "OS: Android TV", "HDR: HDR10", "Audio: Dolby Digital+", "Bluetooth: Yes"],
+                reviews: [{user: "Family Man", text: "Kids love the apps."}]
+            },
+            "dual-kiosk": {
+                title: "Dual Screen Kiosk",
+                price: "₹1,25,000",
+                images: ["Data/58-scaled.png", "Data/60-scaled.png"],
+                video: "",
+                desc: "Dual screen kiosk for double the engagement. Ideal for malls and airports.",
+                specs: ["Screens: 2x 21.5-inch", "Touch: Dual Touch", "OS: Windows 10", "Material: Metal", "Usage: Info/Ads"],
+                reviews: [{user: "Airport Ops", text: "Very useful for flight info."}]
+            },
+            "teaching-podium": {
+                title: "Teaching Podium",
+                price: "₹88,000",
+                images: ["Data/61-scaled.png", "Data/57-scaled.png"],
+                video: "",
+                desc: "Digital podium designed for modern classrooms. Integrated controls.",
+                specs: ["Screen: 19-inch Touch", "Mic: Included", "Storage: Lockable Cabinet", "Connectivity: HDMI/VGA", "Wheels: Lockable"],
+                reviews: [{user: "College Admin", text: "Teachers find it easy to use."}]
+            },
+            "slim-signage": {
+                title: "Slim Digital Signage",
+                price: "₹65,000",
+                images: ["Data/56-scaled.png", "Data/dugutral-strandeee-768x644.png"],
+                video: "",
+                desc: "Ultra-slim digital signage for elegant advertising displays.",
+                specs: ["Thickness: 20mm", "Size: 43-inch", "OS: Android", "Content: USB/Network", "Orientation: Portrait"],
+                reviews: [{user: "Boutique Owner", text: "Looks very stylish."}]
+            },
+            "conf-display": {
+                title: "Conference Room Display",
+                price: "₹1,60,000",
+                images: ["Data/80-1024x858.png", "Data/led-tv-768x644.png"],
+                video: "",
+                desc: "Large format display optimized for video conferencing and presentations.",
+                specs: ["Size: 86-inch", "Resolution: 4K", "Connectivity: Wireless Casting", "Ops Time: 16/7", "Warranty: 3 Years"],
+                reviews: [{user: "CEO", text: "Impressive for client meetings."}]
+            },
+            "info-kiosk": {
+                title: "Information Kiosk",
+                price: "₹55,000",
+                images: ["Data/59-scaled.png", "Data/kiosk-768x644.png"],
+                video: "",
+                desc: "Compact information kiosk for public spaces.",
+                specs: ["Screen: 18.5-inch Touch", "OS: Android", "Stand: Floor Standing", "Network: Wi-Fi/LAN", "Power: Low Consumption"],
+                reviews: [{user: "Library", text: "Great for catalog search."}]
             }
         };
 

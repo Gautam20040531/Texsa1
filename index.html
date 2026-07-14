@@ -20,9 +20,22 @@
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         
         /* Overlays */
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60; display: none; justify-content: center; items-center: center; backdrop-filter: blur(5px); }
-        .overlay-content { background: white; padding: 2rem; border-radius: 1rem; width: 90%; max-width: 500px; position: relative; animation: slideDown 0.3s ease-out; }
-        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60; display: none; backdrop-filter: blur(5px); }
+        
+        /* Search Overlay - Top Slide */
+        #search-overlay { align-items: flex-start; justify-content: center; padding-top: 6rem; }
+        #search-overlay .overlay-content { background: white; padding: 2rem; border-radius: 0 0 1rem 1rem; width: 100%; max-width: 600px; animation: slideDown 0.3s ease-out; }
+        
+        /* Cart Overlay - Right Slide */
+        #cart-overlay { justify-content: flex-end; align-items: stretch; }
+        #cart-overlay .overlay-content { background: white; padding: 2rem; width: 100%; max-width: 450px; height: 100%; border-radius: 1rem 0 0 1rem; animation: slideLeft 0.3s ease-out; display: flex; flex-direction: column; }
+        
+        /* Animations */
+        @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideLeft { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        /* Marquee Smooth Scroll */
+        .top-selling-swiper .swiper-wrapper { transition-timing-function: linear; }
 
         /* CSS for Centering "Our Legacy in Numbers" */
         .legacy-numbers-container {
@@ -120,45 +133,6 @@
             </div>
         </div>
     </section>
-
-    <section id="new-launches" class="py-24 bg-white text-black">
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">New Launches</h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="product-card p-10 flex flex-col justify-between h-[600px] relative overflow-hidden group cursor-pointer" onclick="window.location.href='product-details.html?id=85-webos'">
-                    <div class="z-10">
-                        <span class="bg-samsung-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Flagship</span>
-                        <h3 class="text-4xl font-bold mt-4 mb-2 tracking-tight">85" WebOS 4K TV</h3>
-                        <p class="text-gray-700">Cinematic experience at home.</p>
-                        <button class="mt-8 bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition" onclick="event.stopPropagation(); addToCart('85-webos')">Add to Cart</button>
-                    </div>
-                    <img src="Data/85-websos-tv-1024x683.png" class="absolute -bottom-4 -right-4 w-4/5 object-contain group-hover:scale-105 transition duration-500 ease-in-out">
-                </div>
-
-                <div class="grid grid-rows-2 gap-6 h-[600px]">
-                    <div class="product-card p-8 flex-1 relative overflow-hidden flex items-center group cursor-pointer" onclick="window.location.href='product-details.html?id=50-webos'">
-                        <div class="z-10 w-1/2 pl-4">
-                            <h3 class="text-2xl font-bold mb-2 tracking-tight">50" WebOS TV</h3>
-                            <p class="text-gray-700 text-sm mb-4">Smart Interface.</p>
-                            <span class="samsung-blue font-bold text-sm">Learn more &rarr;</span>
-                        </div>
-                        <img src="Data/50-inch-webos-tv-1-1024x683.png" class="absolute right-0 bottom-0 w-3/5 object-contain group-hover:scale-105 transition duration-500 ease-in-out">
-                    </div>
-                    
-                    <div class="product-card p-8 flex-1 relative overflow-hidden flex items-center group cursor-pointer" onclick="window.location.href='product-details.html?id=43-cloud'">
-                        <div class="z-10 w-1/2 pl-4">
-                            <h3 class="text-2xl font-bold mb-2 tracking-tight">43" Cloud TV</h3>
-                            <p class="text-gray-700 text-sm mb-4">Powered by Cloud.</p>
-                            <span class="samsung-blue font-bold text-sm">Learn more &rarr;</span>
-                        </div>
-                        <img src="Data/43-inch-cloudf-tv-1-1024x683.png" class="absolute right-0 bottom-0 w-3/5 object-contain group-hover:scale-105 transition duration-500 ease-in-out">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="categories" class="py-24 bg-gray-50">
         <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">All Categories</h2>
@@ -169,6 +143,21 @@
             <!-- Pagination -->
             <div id="pagination-controls" class="flex justify-center items-center space-x-2 mt-16">
                 <!-- Pagination links will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- New Client-Provided Layer - As per request, this is a placeholder for a new section -->
+    <!-- The "Our Legacy in Numbers" section is placed below this new layer -->
+
+    <!-- Top Selling Products (Marquee) -->
+    <section class="py-12 bg-gray-50 border-t border-gray-200 overflow-hidden">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+            <h2 class="text-2xl font-bold">Top Selling Products</h2>
+        </div>
+        <div class="swiper top-selling-swiper">
+            <div class="swiper-wrapper" id="top-selling-wrapper">
+                <!-- Slides injected via JS -->
             </div>
         </div>
     </section>
@@ -238,6 +227,13 @@
                 <div class="col-span-2 lg:col-span-2">
                     <h4 class="text-2xl font-bold mb-4 text-white">TEXSA</h4>
                     <p class="text-sm">Crafting quality electronics with modern design.</p>
+                    <div class="mt-6">
+                        <h5 class="font-bold text-white mb-3 text-sm">Follow Us</h5>
+                        <div class="flex space-x-4">
+                            <a href="https://www.instagram.com" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                            <a href="https://www.facebook.com" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <h5 class="font-bold text-white mb-4">Shop</h5>
@@ -270,8 +266,22 @@
                 </div>
                  <div>
                     <h5 class="font-bold text-white mb-4">Contact</h5>
-                    <p class="text-sm">Salt Lake Sector-V, Kolkata 700091</p>
-                    <p class="text-lg font-bold text-white mt-2">+91 80350 76002</p>
+                    <div class="mb-4">
+                        <p class="text-xs text-gray-500 font-bold uppercase mb-1">Office Address:</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Noida,+Uttar+Pradesh+201306,+India" target="_blank" class="text-sm text-gray-400 hover:text-white transition block">
+                            Noida, Uttar Pradesh 201306, India
+                        </a>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-xs text-gray-500 font-bold uppercase mb-1">Zonal Office:</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=New+Market,+MNK+Road,+Nalhati,+Birbhum,+WB+731220" target="_blank" class="text-sm text-gray-400 hover:text-white transition block">
+                            New Market, MNK Road, Nalhati, Birbhum, WB – 731220
+                        </a>
+                        <div class="mt-4 rounded-lg overflow-hidden border border-gray-700 h-32 w-full">
+                            <iframe src="https://maps.google.com/maps?q=Noida,+Uttar+Pradesh+201306,+India&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <p class="text-lg font-bold text-white mt-4"><a href="tel:+918035076002" class="hover:text-samsung-blue transition">+91 80350 76002</a></p>
                 </div>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 text-center text-xs">
@@ -307,7 +317,19 @@
             "commercial-display": { title: "Commercial Display", price: "₹1,35,000", images: ["Data/80-1024x858.png", "Data/led-tv-768x644.png"] },
             "menu-board": { title: "Digital Menu Board", price: "₹55,000", images: ["Data/81-1024x858.png", "Data/56-scaled.png"] },
             "google-tv": { title: '32" Google TV', price: "₹15,999", images: ["Data/32-inch-google-tv-1-scaled.png", "Data/32-inch-cloude-tv-1-scaled.png"] },
-            "standard-tv": { title: '32" Standard TV', price: "₹10,999", images: ["Data/32-normal-1-scaled.png", "Data/32-inch-cloude-tv-1-scaled.png"] }
+            "standard-tv": { title: '32" Standard TV', price: "₹10,999", images: ["Data/32-normal-1-scaled.png", "Data/32-inch-cloude-tv-1-scaled.png"] },
+            "65-webos": { title: '65" WebOS 4K TV', price: "₹89,999", images: ["Data/50-inch-webos-tv-1-1024x683.png", "Data/50-768x644.png"] },
+            "75-interactive": { title: "75\" Interactive Panel", price: "₹1,45,000", images: ["Data/79-1024x858.png", "Data/51-1024x858.png"] },
+            "outdoor-standee": { title: "Outdoor Digital Standee", price: "₹1,10,000", images: ["Data/dugutral-strandeee-1-1024x858.png", "Data/77-1-1024x858.png"] },
+            "self-kiosk-pro": { title: "Self-Ordering Kiosk Pro", price: "₹90,000", images: ["Data/kiosk-768x644.png", "Data/78-1024x858.png"] },
+            "video-wall": { title: "Video Wall Solution", price: "₹2,50,000", images: ["Data/led-tv-768x644.png", "Data/80-1024x858.png"] },
+            "43-android": { title: '43" Smart Android TV', price: "₹26,999", images: ["Data/43-inch-cloudf-tv-1-1024x683.png", "Data/43-inch-cloud-tv-1-scaled.png"] },
+            "55-android": { title: '55" 4K Android TV', price: "₹48,999", images: ["Data/55-scaled.png", "Data/photo2.png"] },
+            "dual-kiosk": { title: "Dual Screen Kiosk", price: "₹1,25,000", images: ["Data/58-scaled.png", "Data/60-scaled.png"] },
+            "teaching-podium": { title: "Teaching Podium", price: "₹88,000", images: ["Data/61-scaled.png", "Data/57-scaled.png"] },
+            "slim-signage": { title: "Slim Digital Signage", price: "₹65,000", images: ["Data/56-scaled.png", "Data/dugutral-strandeee-768x644.png"] },
+            "conf-display": { title: "Conference Room Display", price: "₹1,60,000", images: ["Data/80-1024x858.png", "Data/led-tv-768x644.png"] },
+            "info-kiosk": { title: "Information Kiosk", price: "₹55,000", images: ["Data/59-scaled.png", "Data/kiosk-768x644.png"] }
         };
 
         // Create a unified product list for search and pagination
@@ -408,7 +430,7 @@
         function renderProductsAndPagination() {
             const productGrid = document.getElementById('product-grid');
             const paginationControls = document.getElementById('pagination-controls');
-            const productsPerPage = 6;
+            const productsPerPage = 12;
 
             const urlParams = new URLSearchParams(window.location.search);
             const pageParam = urlParams.get('page');
@@ -427,7 +449,7 @@
             productGrid.innerHTML = '';
             productsToShow.forEach(item => {
                 productGrid.innerHTML += `
-                    <div class="product-card text-center p-6 cursor-pointer flex flex-col" onclick="window.location.href='product-details.html?id=${item.id}'">
+                    <div class="product-card text-center p-6 cursor-pointer flex flex-col hover:-translate-y-2 transition-transform duration-300" onclick="window.location.href='product-details.html?id=${item.id}'">
                         <div class="flex-grow flex items-center justify-center mb-4">
                             <img src="${item.img}" class="h-48 mx-auto object-contain">
                         </div>
@@ -449,6 +471,25 @@
             }
         }
 
+        function renderTopSelling() {
+            const wrapper = document.getElementById('top-selling-wrapper');
+            // Select a few products for the marquee
+            const topProducts = productList.slice(0, 8); 
+            
+            topProducts.forEach(item => {
+                wrapper.innerHTML += `
+                    <div class="swiper-slide w-64">
+                        <div class="bg-white text-black p-4 rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:shadow-md hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col" onclick="window.location.href='product-details.html?id=${item.id}'">
+                            <div class="h-32 flex items-center justify-center mb-3">
+                                <img src="${item.img}" class="h-full object-contain">
+                            </div>
+                            <h4 class="font-bold text-sm truncate">${item.name}</h4>
+                            <p class="text-samsung-blue text-xs font-bold">${item.price}</p>
+                        </div>
+                    </div>`;
+            });
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             updateCartBadge();
@@ -468,6 +509,26 @@
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
+            });
+            
+            renderTopSelling();
+            
+            const topSellingSwiper = new Swiper('.top-selling-swiper', {
+                slidesPerView: 2,
+                spaceBetween: 20,
+                loop: true,
+                speed: 6000, // Slower continuous scroll for better viewing
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: false,
+                },
+                allowTouchMove: true,
+                breakpoints: {
+                    640: { slidesPerView: 3 },
+                    768: { slidesPerView: 4 },
+                    1024: { slidesPerView: 5 },
+                }
             });
 
             // Stats Animation
